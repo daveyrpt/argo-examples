@@ -6,9 +6,9 @@ metadata:
     app: {{ .Values.appName }}
 spec:
   ports:
-  - port: 80
+  - port: 9000
     protocol: TCP
-    name: http
+    name: php-fpm
   selector:
     app: {{ .Values.appName }}
     tier: frontend
