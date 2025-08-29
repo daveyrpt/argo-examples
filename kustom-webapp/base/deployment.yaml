@@ -1,23 +1,48 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: mywebapp
+# spec:
+#   replicas: 1
+#   template:
+#     spec: # Pod spec
+#       containers:
+#       - name: mycontainer
+#         image: "devopsjourney1/mywebapp:latest"
+#         image: "ghcr.io/daveyrpt/flex-url:latest"
+#         ports:
+#         - containerPort: 80
+#         envFrom:
+#         - configMapRef:
+#             name: mykustom-map
+#         resources:
+#           requests:
+#             memory: "16Mi" 
+#             cpu: "50m"    # 500milliCPUs (1/2 CPU)
+#           limits:
+#             memory: "128Mi"
+#             cpu: "100m"
+
+# 1. PHP-FPM Deployment (your app)
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mywebapp
+  name: flex-url-app
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: flex-url-app
   template:
-    spec: # Pod spec
+    metadata:
+      labels:
+        app: flex-url-app
+    spec:
       containers:
-      - name: mycontainer
-        image: "devopsjourney1/mywebapp:latest"
+      - name: php-fpm
+        image: "ghcr.io/daveyrpt/flex-url:latest"
         ports:
-        - containerPort: 80
+        - containerPort: 9000
         envFrom:
         - configMapRef:
             name: mykustom-map
-        resources:
-          requests:
-            memory: "16Mi" 
-            cpu: "50m"    # 500milliCPUs (1/2 CPU)
-          limits:
-            memory: "128Mi"
-            cpu: "100m"

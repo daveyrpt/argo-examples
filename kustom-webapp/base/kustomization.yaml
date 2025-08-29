@@ -1,6 +1,8 @@
 resources:
 - deployment.yaml
 - service.yaml
+- configmap.yaml
+- nginx.yaml
 
 commonLabels:
   app: kustomwebapp
