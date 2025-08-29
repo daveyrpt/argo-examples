@@ -8,5 +8,11 @@ configmap:
     CUSTOM_HEADER: 'This app was deployed with helm!'
 
 image:
-  name: devopsjourney1/mywebapp
+  name: ghcr.io/daveyrpt/flex-url:latest
   tag: latest
+
+nginx:
+  replicas: 1
+  image:
+    name: nginx
+    tag: 1.25-alpine
