@@ -1,6 +1,6 @@
 appName: myhelmapp
 
-port: 9000
+port: 80
 
 configmap:
   name: myhelmapp-configmap-v1
