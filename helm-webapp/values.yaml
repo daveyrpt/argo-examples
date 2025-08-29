@@ -8,7 +8,7 @@ configmap:
     CUSTOM_HEADER: 'This app was deployed with helm!'
 
 image:
-  name: ghcr.io/daveyrpt/flex-url:latest
+  name: ghcr.io/daveyrpt/flex-url
   tag: latest
 
 nginx:
