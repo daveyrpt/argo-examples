@@ -8,16 +8,12 @@ data:
   default.conf: |
     server {
         listen 80;
-        root /var/www/public;
-        index index.php;
         
         location / {
-            try_files $uri $uri/ /index.php?$query_string;
-        }
-        
-        location ~ \.php$ {
-            fastcgi_pass {{ .Values.appName }}-app-service:9000;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
+            proxy_pass http://{{ .Values.appName }}:{{ .Values.port }};
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
         }
     }
